@@ -1,6 +1,6 @@
 # Get-SystemInventory-Pro
 
-> **Enterprise-grade PowerShell tool for collecting comprehensive hardware, software, and network inventory from local and remote Windows machines.**
+> **PowerShell portfolio tool for collecting hardware, software, and network inventory from local and remote Windows machines.**
 
 ---
 
@@ -24,7 +24,7 @@
 
 ## Overview
 
-`Get-SystemInventory-Pro.ps1` is a production-ready PowerShell script designed for IT administrators who need to audit Windows environments at scale. It supports single-machine scans, multi-target lists, and full Active Directory OU sweeps — all with optional parallel execution and rich multi-format reporting.
+`Get-SystemInventory-Pro.ps1` is a lab/portfolio script for practising Windows asset inventory. It supports local and remote targeting, AD OU queries, optional parallel collection, and multiple report formats. Production readiness, scale, and remote compatibility require separate validation in the intended environment.
 
 ```
 ╔════════════════════════════════════════════════════╗
@@ -89,14 +89,14 @@ Enable-PSRemoting -Force
 ## Installation
 
 ```bash
-git clone https://github.com/your-org/Get-SystemInventory-Pro.git
-cd Get-SystemInventory-Pro
+git clone https://github.com/SuriyaBoon/home-lab-v5.git
+cd home-lab-v5
 ```
 
 Or download the script directly:
 
 ```powershell
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/your-org/Get-SystemInventory-Pro/main/Get-SystemInventory-Pro.ps1" `
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/SuriyaBoon/home-lab-v5/main/Get-SystemInventory-Pro.ps1" `
                   -OutFile "Get-SystemInventory-Pro.ps1"
 ```
 
@@ -261,8 +261,9 @@ Failures are caught per-host and logged without halting the pipeline. All unhand
 ```powershell
 # On the target machine (or via GPO)
 Enable-PSRemoting -Force
-Set-Item WSMan:\localhost\Client\TrustedHosts -Value "*" -Force
 ```
+
+Prefer domain authentication to named hosts. Do not use a wildcard TrustedHosts setting as a generic fix; confirm name resolution, permissions, and the intended WinRM authentication configuration.
 
 ### `-Parallel` flag is ignored / falls back to sequential
 
